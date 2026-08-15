@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07566a"><title>Accueil Brave</title>
+<style>
+:root{--text:#17343d;--muted:#668087;--glass:rgba(255,255,255,.86);--accent:#087187}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
+body{background:radial-gradient(90% 35% at 50% 4%,rgba(255,255,255,.45),transparent 70%),linear-gradient(180deg,#9bc2ca 0,#4f8c9b 32%,#166b7e 65%,#073f51 100%);background-attachment:fixed}
+body:before,body:after{content:"";position:fixed;z-index:-1;left:-15%;width:130%;height:25vh;bottom:8vh;border-radius:50%;background:rgba(255,255,255,.11);transform:rotate(-3deg)}
+body:after{bottom:-7vh;background:rgba(0,35,50,.16);transform:rotate(3deg)}
+.wrap{width:min(620px,94vw);margin:auto;padding:18px 0 24px}.top{display:flex;align-items:center;justify-content:space-between;color:white;margin-bottom:13px}
+h1{margin:0;font-size:1.55rem;letter-spacing:-.03em}.date{font-size:.74rem;opacity:.82;margin-top:2px;text-transform:capitalize}.clock{font-size:1.55rem;font-variant-numeric:tabular-nums}
+.search{display:flex;gap:8px;background:#fff;border-radius:999px;padding:6px 7px 6px 14px;box-shadow:0 10px 28px rgba(0,35,50,.18)}
+.search input{min-width:0;flex:1;border:0;outline:0;font-size:.94rem;color:var(--text)}.search button{border:0;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;padding:9px 14px}
+.card{background:var(--glass);border:1px solid rgba(255,255,255,.62);border-radius:18px;padding:13px;margin-top:13px;box-shadow:0 9px 28px rgba(0,35,50,.12);backdrop-filter:blur(12px)}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.title h2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin:0;color:#34565f}.title span,.note{font-size:.68rem;color:var(--muted)}
+.ticker{overflow:hidden;margin:0 -2px}.tape{display:flex;gap:8px;width:max-content}.quote{width:122px;flex:0 0 122px;background:rgba(255,255,255,.64);border-radius:13px;padding:9px}
+.qname{font-size:.67rem;color:#506c73;font-weight:750}.qvalue{font-size:.92rem;font-weight:800;margin-top:2px}.qchange{font-size:.65rem;margin-top:1px}.up{color:#137653}.down{color:#ad4c4c}
+.links{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.link{min-width:0;min-height:72px;border-radius:14px;background:rgba(255,255,255,.62);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.logo{width:34px;height:34px;border-radius:10px;background:white;display:grid;place-items:center;box-shadow:0 3px 9px rgba(0,0,0,.08);overflow:hidden;font-weight:800}.logo img{width:100%;height:100%;object-fit:cover}.label{font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:95%}
+.group{margin-top:12px}.group:first-child{margin-top:0}.group h3{font-size:.68rem;color:#567179;margin:0 0 7px 2px;text-transform:uppercase;letter-spacing:.07em}
+.news-list{display:grid}.news-item{padding:10px 1px;border-top:1px solid rgba(20,70,80,.12)}.news-item:first-child{border-top:0}.news-title{font-size:.86rem;font-weight:680;line-height:1.28}.news-meta{font-size:.64rem;color:var(--muted);margin-top:3px}
+.more{color:var(--accent);font-weight:700;font-size:.68rem}.footer{text-align:center;color:rgba(255,255,255,.75);font-size:.65rem;margin-top:13px}
+@media(max-width:390px){.links{grid-template-columns:repeat(3,1fr)}.wrap{width:94vw}.quote{width:112px;flex-basis:112px}.clock{font-size:1.35rem}}
+</style></head><body><div class="wrap">
+<header class="top"><div><h1>Bonjour 👋</h1><div id="date" class="date"></div></div><div id="clock" class="clock"></div></header>
+<form id="searchForm" class="search"><span>🦁</span><input id="search" placeholder="Rechercher avec Brave…" autocomplete="off"><button>Rechercher</button></form>
+
+<section class="card"><div class="title"><h2>📈 Bourse</h2><span id="stockStatus">actualisation…</span></div><div class="ticker"><div id="tape" class="tape"></div></div><div class="note" style="margin-top:7px">Cours indicatifs • mise à jour à l'ouverture</div></section>
+
+<section class="card"><div class="title"><h2>Mes raccourcis</h2></div>
+<div class="group"><h3>🌦️ Météo</h3><div class="links">
+<a class="link" href="https://www.meteociel.fr/" target="_blank"><span class="logo">M</span><span class="label">Météociel</span></a>
+<a class="link" href="https://www.meteox.com/fr-fr" target="_blank"><span class="logo">🌧️</span><span class="label">Meteox</span></a></div></div>
+<div class="group"><h3>🛒 Courses</h3><div class="links">
+<a class="link" href="https://www.carrefour.fr/courses" target="_blank"><span class="logo">C</span><span class="label">Carrefour</span></a>
+<a class="link" href="https://www.intermarche.com/" target="_blank"><span class="logo">I</span><span class="label">Intermarché</span></a>
+<a class="link" href="https://www.ikea.com/fr/fr/" target="_blank"><span class="logo">IKEA</span><span class="label">IKEA</span></a></div></div>
+<div class="group"><h3>🩺 Santé</h3><div class="links"><a class="link" href="https://www.doctolib.fr/" target="_blank"><span class="logo">D</span><span class="label">Doctolib</span></a></div></div>
+<div class="group"><h3>📱 Social</h3><div class="links">
+<a class="link" href="https://www.facebook.com/" target="_blank"><span class="logo">f</span><span class="label">Facebook</span></a>
+<a class="link" href="https://www.instagram.com/" target="_blank"><span class="logo">◎</span><span class="label">Instagram</span></a>
+<a class="link" href="https://www.pinterest.fr/" target="_blank"><span class="logo">P</span><span class="label">Pinterest</span></a></div></div></section>
+
+<section class="card"><div class="title"><h2>📰 20 Minutes</h2><a class="more" href="https://www.20minutes.fr/" target="_blank">Tout voir ↗</a></div><div id="newsList" class="news-list"><div class="news-item"><div class="news-title">Chargement des informations…</div></div></div></section>
+<div class="footer">Accueil Brave • légère et pensée pour mobile 🌊</div></div>
+
+<script>
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+function clock(){let d=new Date();$('date').textContent=d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});$('clock').textContent=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});}clock();setInterval(clock,1000);
+$('searchForm').onsubmit=e=>{e.preventDefault();let q=$('search').value.trim();if(q)location.href='https://search.brave.com/search?q='+encodeURIComponent(q)};
+const symbols=[['CAC 40','^FCHI'],['DOW JONES','^DJI'],['NASDAQ','^IXIC'],['EUR/USD','EURUSD=X'],['OR','GC=F']];
+function card(x){let g=x.change>=0;return '<div class="quote"><div class="qname">'+esc(x.name)+'</div><div class="qvalue">'+esc(x.value)+'</div><div class="qchange '+(g?'up':'down')+'">'+(x.change==null?'—':(g?'+':'')+x.change.toFixed(2)+'% '+(g?'▲':'▼'))+'</div></div>'}
+async function loadStocks(){
+ $('stockStatus').textContent='actualisation…';let arr=[];
+ for(const [name,sym] of symbols){try{
+  const u='https://api.allorigins.win/raw?url='+encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?range=1d&interval=1d');
+  const j=await fetch(u,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()});const m=j.chart.result[0].meta,p=m.regularMarketPrice,prev=m.previousClose;
+  arr.push({name,value:p.toLocaleString('fr-FR',{maximumFractionDigits:2}),change:prev?(p-prev)/prev*100:null});
+ }catch(e){arr.push({name,value:'Indisponible',change:null})}}
+ $('tape').innerHTML=arr.map(card).join('');$('stockStatus').textContent=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+}loadStocks();
+
+async function loadNews(){const box=$('newsList'),target='https://www.20minutes.fr/rss/flux/une.xml';
+ try{const u='https://api.allorigins.win/raw?url='+encodeURIComponent(target);const text=await fetch(u,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text()});
+  const xml=new DOMParser().parseFromString(text,'text/xml'),items=[...xml.querySelectorAll('item')].slice(0,7);if(!items.length)throw 0;
+  box.innerHTML=items.map(i=>{let title=i.querySelector('title')?.textContent||'Information',link=i.querySelector('link')?.textContent||'https://www.20minutes.fr/',date=i.querySelector('pubDate')?.textContent,dt=date?new Date(date).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';return '<a class="news-item" href="'+esc(link)+'" target="_blank"><div class="news-title">'+esc(title)+'</div><div class="news-meta">20 Minutes'+(dt?' • '+dt:'')+'</div></a>'}).join('');
+ }catch(e){box.innerHTML='<a class="news-item" href="https://www.20minutes.fr/" target="_blank"><div class="news-title">Le flux est momentanément indisponible.</div><div class="news-meta">Ouvrir 20 Minutes ↗</div></a>'}}
+loadNews();setInterval(loadNews,900000);
+</script></body></html>
