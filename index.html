@@ -172,12 +172,31 @@ async function weather(lat,lon){
     document.getElementById("weatherExtra").innerHTML=`Ressenti ${Math.round(c.apparent_temperature)}°C<br>Vent ${Math.round(c.wind_speed_10m)} km/h`;
   }catch(e){document.getElementById("weatherDesc").textContent="Météo indisponible";}
 }
+
+function localisationParIP(){
+  // Repli : géolocalisation approximative par adresse IP (aucune permission nécessaire)
+  fetch("https://ipapi.co/json/")
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.latitude && data.longitude){
+        weather(data.latitude,data.longitude);
+      } else {
+        throw new Error("Pas de coordonnées IP");
+      }
+    })
+    .catch(()=>{
+      document.getElementById("weatherDesc").textContent="Localisation refusée";
+      document.getElementById("weatherExtra").textContent="Cliquez sur MétéoCiel pour consulter la météo.";
+    });
+}
+
 if(navigator.geolocation){
   navigator.geolocation.getCurrentPosition(
     p=>weather(p.coords.latitude,p.coords.longitude),
-    ()=>{document.getElementById("weatherDesc").textContent="Localisation refusée";document.getElementById("weatherExtra").textContent="Cliquez sur MétéoCiel pour consulter la météo."},
+    ()=>localisationParIP(),
     {enableHighAccuracy:false,timeout:8000}
   );
+}else localisationParIP();  
 }else document.getElementById("weatherDesc").textContent="Géolocalisation non disponible";
 </script>
 </body>
